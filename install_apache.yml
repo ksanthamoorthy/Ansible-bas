@@ -1,0 +1,6 @@
+---
+- hosts: RENG_Node
+  roles:
+    - { role: install }
+    - { role: target }
+

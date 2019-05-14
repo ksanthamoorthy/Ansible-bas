@@ -1,0 +1,20 @@
+---
+
+#Playbook to setup the target machine 
+
+  hosts: all
+  gather_facts: False
+  remote_user: root
+  become: yes
+  become_user: root
+  become_method : sudo
+
+
+  tasks:  
+    name: Install Python 2
+    raw: test -e //usr/bin/python || {yum update && yum install -y python}
+
+    name: Pairing key
+    authorized_key: user=root
+                    exclusive=no
+                    key="{{ lookup{'file', '~/.ssh/id_rsa.pub'}}}"
